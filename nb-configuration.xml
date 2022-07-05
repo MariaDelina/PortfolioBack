@@ -10,6 +10,7 @@ Without this configuration present, some functionality in the IDE may be limited
         <config-files>
             <config-file>src/main/resources/system.properties</config-file>
             <config-file>pom.xml</config-file>
+            <config-file>src/main/resources/application.properties</config-file>
         </config-files>
         <config-file-groups/>
     </spring-data>
