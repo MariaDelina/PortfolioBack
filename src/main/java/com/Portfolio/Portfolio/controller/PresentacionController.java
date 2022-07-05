@@ -41,7 +41,7 @@ public class PresentacionController {
     public void agregarPresentacion(@RequestBody Presentacion pre){
         expeServ.crearPresentacion(pre);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void borrarPresentacion(@PathVariable Long id){
         expeServ.borrarPresentacion(id);
     }
@@ -49,7 +49,7 @@ public class PresentacionController {
     public void actualizarPresentacion(@RequestBody Presentacion pre){
         expeServ.actualizarPresentacion(pre);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public void updatePresentacion(@PathVariable ("id") Long id, @RequestBody Presentacion pres){
        expeServ.updatePresentacion(id, pres);
     }      

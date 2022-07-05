@@ -42,7 +42,7 @@ public class ProyectosController {
     public void agregarProyectos(@RequestBody Proyectos pro){
         proServ.crearProyectos(pro);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void borrarProyectos(@PathVariable Long id){
         proServ.borrarProyectos(id);
     }
@@ -50,7 +50,7 @@ public class ProyectosController {
     public void actualizarProyectos(@RequestBody Proyectos pro){
         proServ.actualizarProyectos(pro);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public void updateProyectos(@PathVariable ("id") Long id, @RequestBody Proyectos pro){
        proServ.updateProyectos(id, pro);
     }   

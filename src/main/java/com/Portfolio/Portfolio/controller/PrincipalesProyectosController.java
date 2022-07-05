@@ -41,7 +41,7 @@ public class PrincipalesProyectosController {
     public void agregarPrincipalesProyectos(@RequestBody PrincipalesProyectos prinpro){
         prinproServ.crearPrincipalesProyectos(prinpro);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void borrarPrincipalesProyectos(@PathVariable Long id){
         prinproServ.borrarPrincipalesProyectos(id);
     }
@@ -49,7 +49,7 @@ public class PrincipalesProyectosController {
     public void actualizarPrincipalesProyectos(@RequestBody PrincipalesProyectos prinpro){
         prinproServ.actualizarPrincipalesProyectos(prinpro);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public void updatePrincipalesProyectos(@PathVariable ("id") Long id, @RequestBody PrincipalesProyectos prinpro){
        prinproServ.updatePrincipalesProyectos(id, prinpro);
     }  

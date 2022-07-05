@@ -42,7 +42,7 @@ public class EducacionController {
     public void agregarEducacion(@RequestBody Educacion educ){
         educServ.crearEducacion(educ);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void borrarEducacion(@PathVariable Long id){
         educServ.borrarEducacion(id);
     }
@@ -50,7 +50,7 @@ public class EducacionController {
     public void actualizarEducacion(@RequestBody Educacion educ){
         educServ.actualizarEducacion(educ);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public void updateEducacion(@PathVariable ("id") Long id, @RequestBody Educacion educ){
        educServ.updateEducacion(id, educ);
     }   

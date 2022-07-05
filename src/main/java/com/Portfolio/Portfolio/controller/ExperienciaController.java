@@ -41,7 +41,7 @@ public class ExperienciaController {
     public void agregarExperiencia(@RequestBody Experiencia exp){
         expeServ.crearExperiencia(exp);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void borrarExperiencia(@PathVariable Long id){
         expeServ.borrarExperiencia(id);
     }
@@ -49,7 +49,7 @@ public class ExperienciaController {
     public void actualizarExperiencia(@RequestBody Experiencia exp){
         expeServ.actualizarExperiencia(exp);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public void updateExperiencia(@PathVariable ("id") Long id, @RequestBody Experiencia exp){
        expeServ.updateExperiencia(id, exp);
     }      
