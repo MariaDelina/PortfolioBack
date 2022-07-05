@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.model;
 
 import javax.persistence.Column;
@@ -10,29 +9,31 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-        
-        @Setter @Getter
+@Setter
+@Getter
 @Entity
 @Table(name = "banner")
 public class Banner {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    @Column(name="primera_descripcion")
+    @Column(name = "primera_descripcion")
     private String primera_descripcion;
-    @Column(name="segunda_descripcion")
+    @Column(name = "segunda_descripcion")
     private String segunda_descripcion;
-    @Column(name="tercera_descripcion")
+    @Column(name = "tercera_descripcion")
     private String tercera_descripcion;
 
-public Banner(){
-    
+    public Banner() {
+
+    }
+
+    public Banner(Long id, String primera_descripcion, String segunda_descripcion, String tercera_descripcion) {
+        this.id = id;
+        this.primera_descripcion = primera_descripcion;
+        this.segunda_descripcion = segunda_descripcion;
+        this.tercera_descripcion = tercera_descripcion;
+    }
 }
-public Banner(Long id, String primera_descripcion, String segunda_descripcion, String tercera_descripcion ){
-    this.id = id;
-    this.primera_descripcion = primera_descripcion;
-    this.segunda_descripcion = segunda_descripcion;
-    this.tercera_descripcion = tercera_descripcion;
-}
-        }
