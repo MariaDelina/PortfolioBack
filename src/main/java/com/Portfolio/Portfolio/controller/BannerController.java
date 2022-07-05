@@ -52,7 +52,6 @@ public class BannerController {
     }
     
     @PutMapping("/update/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public void updateBanner(@PathVariable Long id, @RequestBody Banner bane){
        baneServ.updateBanner(id, bane);
     }   
