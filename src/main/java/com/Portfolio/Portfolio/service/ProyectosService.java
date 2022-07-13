@@ -19,8 +19,8 @@ public class ProyectosService implements IProyectosService{
     }
 
     @Override
-    public void crearProyectos(Proyectos proy) {
-        proyRepo.save(proy);
+    public Proyectos crearProyectos(Proyectos proy) {
+        return proyRepo.save(proy);
     }
 
     @Override
@@ -33,14 +33,5 @@ public class ProyectosService implements IProyectosService{
         return proyRepo.findById(id).orElse(null);
     }
 
-    @Override
-    public void actualizarProyectos(Proyectos proy) {
-        proyRepo.save(proy);
-    }
-
-    @Override
-    public void updateProyectos(Long id, Proyectos proy) {
-        proyRepo.findById(id);
-        proyRepo.save(proy);
-    }
+   
 }

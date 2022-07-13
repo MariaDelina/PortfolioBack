@@ -19,8 +19,8 @@ public class BannerService implements IBannerService{
     }
 
     @Override
-    public void crearBanner(Banner ban) {
-        banRepo.save(ban);
+    public Banner crearBanner(Banner ban) {
+        return banRepo.save(ban);
     }
 
     @Override
@@ -33,15 +33,13 @@ public class BannerService implements IBannerService{
         return banRepo.findById(id).orElse(null);
     }
 
-    @Override
-    public void actualizarBanner(Banner ban) {
-        banRepo.save(ban);
-    }
-
-    @Override
-    public void updateBanner(Long id, Banner ban) {
-        banRepo.findById(id);
-        banRepo.save(ban);
+   
+@Override
+public Banner findBanner(Long id){
+    Banner banner = banRepo.findById(id).orElse(null);
+    return banner;
+}
+   
     }
     
-}
+

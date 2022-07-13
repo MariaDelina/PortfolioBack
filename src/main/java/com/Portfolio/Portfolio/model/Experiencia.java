@@ -1,6 +1,7 @@
 
 package com.Portfolio.Portfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,4 +45,5 @@ public class Experiencia {
         this.fecha_de_actividad=fecha_de_actividad;
         
     }
+    
 }

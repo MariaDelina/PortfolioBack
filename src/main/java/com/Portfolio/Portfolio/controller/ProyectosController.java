@@ -2,9 +2,13 @@
 package com.Portfolio.Portfolio.controller;
 
 import com.Portfolio.Portfolio.model.Proyectos;
+import com.Portfolio.Portfolio.repository.ProyectosRepository;
 import com.Portfolio.Portfolio.service.IProyectosService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +29,9 @@ public class ProyectosController {
     
      @Autowired
     private IProyectosService proServ;
+     
+      @Autowired
+    private ProyectosRepository proyRepo;
        
     @GetMapping("/lista")
     @ResponseBody
@@ -46,12 +53,20 @@ public class ProyectosController {
     public void borrarProyectos(@PathVariable Long id){
         proServ.borrarProyectos(id);
     }
-    @PutMapping("/actualizar")
-    public void actualizarProyectos(@RequestBody Proyectos pro){
-        proServ.actualizarProyectos(pro);
-    }
+    
     @PutMapping("/update/{id}")
-    public void updateProyectos(@PathVariable ("id") Long id, @RequestBody Proyectos pro){
-       proServ.updateProyectos(id, pro);
-    }   
+    public ResponseEntity<Proyectos> updateProyectos(@PathVariable("id") Long id, @RequestBody Proyectos proyectos){
+        Optional<Proyectos> proyectosData = proyRepo.findById (id);
+        if(proyectosData.isPresent()){
+            Proyectos _proyectos = proyectosData.get();
+            _proyectos.setInfo_de_proyectos_realizados(proyectos.getInfo_de_proyectos_realizados());
+            _proyectos.setNombre_de_proyecto(proyectos.getNombre_de_proyecto());
+            _proyectos.setFecha_de_realizacion(proyectos.getFecha_de_realizacion());
+            _proyectos.setDescripcion_del_proyecto(proyectos.getDescripcion_del_proyecto());
+            _proyectos.setLink_de_evidencia(proyectos.getLink_de_evidencia());
+            return new ResponseEntity<> (proServ.crearProyectos( _proyectos), HttpStatus.OK);
+                    }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }      
+}  
 }

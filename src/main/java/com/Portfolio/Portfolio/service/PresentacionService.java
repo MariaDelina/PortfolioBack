@@ -19,8 +19,8 @@ public class PresentacionService implements IPresentacionService{
     }
 
     @Override
-    public void crearPresentacion(Presentacion pre) {
-        presRepo.save(pre);
+    public Presentacion crearPresentacion(Presentacion pre) {
+        return presRepo.save(pre);
     }
 
     @Override
@@ -33,14 +33,7 @@ public class PresentacionService implements IPresentacionService{
         return presRepo.findById(id).orElse(null);
     }
 
-    @Override
-    public void actualizarPresentacion(Presentacion pre) {
-        presRepo.save(pre);
     }
 
-    @Override
-    public void updatePresentacion(Long id, Presentacion pres) {
-        presRepo.findById(id);
-        presRepo.save(pres);
-    }
-}
+   
+

@@ -2,9 +2,13 @@
 package com.Portfolio.Portfolio.controller;
 
 import com.Portfolio.Portfolio.model.Experiencia;
+import com.Portfolio.Portfolio.repository.ExperienciaRepository;
 import com.Portfolio.Portfolio.service.IExperienciaService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,9 @@ public class ExperienciaController {
     
     @Autowired
     private IExperienciaService expeServ;
+    
+    @Autowired
+    private ExperienciaRepository expRepo;
        
     @GetMapping("/lista")
     @ResponseBody
@@ -45,13 +52,21 @@ public class ExperienciaController {
     public void borrarExperiencia(@PathVariable Long id){
         expeServ.borrarExperiencia(id);
     }
-    @PutMapping("/actualizar")
-    public void actualizarExperiencia(@RequestBody Experiencia exp){
-        expeServ.actualizarExperiencia(exp);
-    }
+    
+    
     @PutMapping("/update/{id}")
-    public void updateExperiencia(@PathVariable ("id") Long id, @RequestBody Experiencia exp){
-       expeServ.updateExperiencia(id, exp);
+    public ResponseEntity<Experiencia> updateExperiencia(@PathVariable("id") Long id, @RequestBody Experiencia experiencia){
+        Optional<Experiencia> experienciaData = expRepo.findById (id);
+        if(experienciaData.isPresent()){
+            Experiencia _experiencia = experienciaData.get();
+            _experiencia.setLugar_de_trabajo(experiencia.getLugar_de_trabajo());
+            _experiencia.setTitulo_del_puesto(experiencia.getTitulo_del_puesto());
+            _experiencia.setUrl_logo_empresa(experiencia.getUrl_logo_empresa());
+            _experiencia.setDescripcion_de_actividades(experiencia.getDescripcion_de_actividades());
+            _experiencia.setFecha_de_actividad(experiencia.getFecha_de_actividad());
+            return new ResponseEntity<> (expeServ.crearExperiencia( _experiencia), HttpStatus.OK);
+                    }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }      
 }
-
+}

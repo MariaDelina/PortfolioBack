@@ -3,9 +3,13 @@ package com.Portfolio.Portfolio.controller;
 
 
 import com.Portfolio.Portfolio.model.PrincipalesProyectos;
+import com.Portfolio.Portfolio.repository.PrincipalesProyectosRepository;
 import com.Portfolio.Portfolio.service.IPrincipalesProyectosService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PrincipalesProyectosController {
      @Autowired
     private IPrincipalesProyectosService prinproServ;
+     
+     @Autowired
+    private PrincipalesProyectosRepository prinproyRepo;
        
     @GetMapping("/lista")
     @ResponseBody
@@ -45,12 +52,17 @@ public class PrincipalesProyectosController {
     public void borrarPrincipalesProyectos(@PathVariable Long id){
         prinproServ.borrarPrincipalesProyectos(id);
     }
-    @PutMapping("/actualizar")
-    public void actualizarPrincipalesProyectos(@RequestBody PrincipalesProyectos prinpro){
-        prinproServ.actualizarPrincipalesProyectos(prinpro);
-    }
+    
     @PutMapping("/update/{id}")
-    public void updatePrincipalesProyectos(@PathVariable ("id") Long id, @RequestBody PrincipalesProyectos prinpro){
-       prinproServ.updatePrincipalesProyectos(id, prinpro);
-    }  
+      public ResponseEntity<PrincipalesProyectos> updatePrincipalesProyectos(@PathVariable("id") Long id, @RequestBody PrincipalesProyectos principalesProyectos){
+        Optional<PrincipalesProyectos> principalesProyectosData = prinproyRepo.findById (id);
+        if(principalesProyectosData.isPresent()){
+            PrincipalesProyectos _principalesProyectos = principalesProyectosData.get();
+            _principalesProyectos.setUrl_primer_proyecto_principal(principalesProyectos.getUrl_primer_proyecto_principal());
+            _principalesProyectos.setUrl_segundo_proyecto_principal(principalesProyectos.getUrl_segundo_proyecto_principal());
+            return new ResponseEntity<> (prinproServ.crearPrincipalesProyectos( _principalesProyectos), HttpStatus.OK);
+                    }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }      
+}  
 }

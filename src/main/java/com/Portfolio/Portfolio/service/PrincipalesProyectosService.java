@@ -19,8 +19,8 @@ public class PrincipalesProyectosService implements IPrincipalesProyectosService
     }
 
     @Override
-    public void crearPrincipalesProyectos(PrincipalesProyectos prinpro) {
-        prinproyRepo.save(prinpro);
+    public PrincipalesProyectos crearPrincipalesProyectos(PrincipalesProyectos prinpro) {
+        return prinproyRepo.save(prinpro);
     }
 
     @Override
@@ -33,16 +33,6 @@ public class PrincipalesProyectosService implements IPrincipalesProyectosService
         return prinproyRepo.findById(id).orElse(null);
     }
 
-    @Override
-    public void actualizarPrincipalesProyectos(PrincipalesProyectos prinpro) {
-        prinproyRepo.save(prinpro);
-    }
-
-    @Override
-    public void updatePrincipalesProyectos(Long id, PrincipalesProyectos prinpro) {
-        prinproyRepo.findById(id);
-        prinproyRepo.save(prinpro);
-    }
-
+  
     
 }

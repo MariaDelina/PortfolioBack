@@ -3,9 +3,13 @@ package com.Portfolio.Portfolio.controller;
 
 
 import com.Portfolio.Portfolio.model.Educacion;
+import com.Portfolio.Portfolio.repository.EducacionRepository;
 import com.Portfolio.Portfolio.service.IEducacionService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +29,9 @@ public class EducacionController {
     
      @Autowired
     private IEducacionService educServ;
+     
+     @Autowired
+    private EducacionRepository eduRepo;
        
     @GetMapping("/lista")
     @ResponseBody
@@ -46,12 +53,21 @@ public class EducacionController {
     public void borrarEducacion(@PathVariable Long id){
         educServ.borrarEducacion(id);
     }
-    @PutMapping("/actualizar")
-    public void actualizarEducacion(@RequestBody Educacion educ){
-        educServ.actualizarEducacion(educ);
-    }
+    
     @PutMapping("/update/{id}")
-    public void updateEducacion(@PathVariable ("id") Long id, @RequestBody Educacion educ){
-       educServ.updateEducacion(id, educ);
-    }   
+      public ResponseEntity<Educacion> updateEducacion(@PathVariable("id") Long id, @RequestBody Educacion educacion){
+        Optional<Educacion> educacionData = eduRepo.findById (id);
+        if(educacionData.isPresent()){
+            Educacion _educacion = educacionData.get();
+            _educacion.setCertificaciones(educacion.getCertificaciones());
+            _educacion.setInfo_de_instituto(educacion.getInfo_de_instituto());
+            _educacion.setUrl_logo_instituto(educacion.getUrl_logo_instituto());
+            _educacion.setNombre_carrera(educacion.getNombre_carrera());
+            _educacion.setDesde_periodo_ano(educacion.getDesde_periodo_ano());
+            _educacion.setHasta_periodo_ano(educacion.getHasta_periodo_ano());
+            return new ResponseEntity<> (educServ.crearEducacion( _educacion), HttpStatus.OK);
+                    }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }      
+}  
 }
