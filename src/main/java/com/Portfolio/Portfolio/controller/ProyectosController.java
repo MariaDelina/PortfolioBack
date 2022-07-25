@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.controller;
 
 import com.Portfolio.Portfolio.model.Proyectos;
@@ -21,52 +20,52 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT, RequestMethod.PATCH})
-@RequestMapping(path="/api/proyectos")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
+@RequestMapping(path = "/api/proyectos")
 public class ProyectosController {
-    
-     @Autowired
+
+    @Autowired
     private IProyectosService proServ;
-     
-      @Autowired
+
+    @Autowired
     private ProyectosRepository proyRepo;
-       
+
     @GetMapping("/lista")
     @ResponseBody
-    public List<Proyectos> verProyectos(){
+    public List<Proyectos> verProyectos() {
         return proServ.verProyectos();
     }
-    
+
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public Proyectos buscarBanner(@PathVariable Long id){
-       return proServ.buscarProyectos(id);
+    public Proyectos buscarBanner(@PathVariable Long id) {
+        return proServ.buscarProyectos(id);
     }
-         
+
     @PostMapping("/create")
-    public void agregarProyectos(@RequestBody Proyectos pro){
+    public void agregarProyectos(@RequestBody Proyectos pro) {
         proServ.crearProyectos(pro);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void borrarProyectos(@PathVariable Long id){
+    public void borrarProyectos(@PathVariable Long id) {
         proServ.borrarProyectos(id);
     }
-    
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Proyectos> updateProyectos(@PathVariable("id") Long id, @RequestBody Proyectos proyectos){
-        Optional<Proyectos> proyectosData = proyRepo.findById (id);
-        if(proyectosData.isPresent()){
+    public ResponseEntity<Proyectos> updateProyectos(@PathVariable("id") Long id, @RequestBody Proyectos proyectos) {
+        Optional<Proyectos> proyectosData = proyRepo.findById(id);
+        if (proyectosData.isPresent()) {
             Proyectos _proyectos = proyectosData.get();
             _proyectos.setInfo_de_proyectos_realizados(proyectos.getInfo_de_proyectos_realizados());
             _proyectos.setNombre_de_proyecto(proyectos.getNombre_de_proyecto());
             _proyectos.setFecha_de_realizacion(proyectos.getFecha_de_realizacion());
             _proyectos.setDescripcion_del_proyecto(proyectos.getDescripcion_del_proyecto());
             _proyectos.setLink_de_evidencia(proyectos.getLink_de_evidencia());
-            return new ResponseEntity<> (proServ.crearProyectos( _proyectos), HttpStatus.OK);
-                    }else {
+            return new ResponseEntity<>(proServ.crearProyectos(_proyectos), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }      
-}  
+        }
+    }
 }

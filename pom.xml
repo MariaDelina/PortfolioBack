@@ -14,9 +14,9 @@
     <name>Portfolio</name>
     <description>Presentación de proyecto para Argentina Programa</description>
     <properties>
-            <maven.compiler.source>1.8</maven.compiler.source>
-            <maven.compliler.target>1.8</maven.compliler.target>
-	</properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compliler.target>1.8</maven.compliler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

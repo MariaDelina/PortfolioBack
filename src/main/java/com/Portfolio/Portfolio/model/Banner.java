@@ -9,10 +9,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author mdtre
- */
 @Setter
 @Getter
 @Entity

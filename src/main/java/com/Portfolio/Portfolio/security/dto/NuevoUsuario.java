@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.security.dto;
 
 import java.util.HashSet;
@@ -6,8 +5,8 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-
 public class NuevoUsuario {
+
     @NotBlank
     private String nombre;
     @NotBlank
@@ -45,6 +44,7 @@ public class NuevoUsuario {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }

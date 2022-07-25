@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.service;
 
 import com.Portfolio.Portfolio.model.Banner;
@@ -8,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BannerService implements IBannerService{
+public class BannerService implements IBannerService {
 
-   @Autowired
+    @Autowired
     private BannerRepository banRepo;
 
     @Override
@@ -33,13 +32,10 @@ public class BannerService implements IBannerService{
         return banRepo.findById(id).orElse(null);
     }
 
-   
-@Override
-public Banner findBanner(Long id){
-    Banner banner = banRepo.findById(id).orElse(null);
-    return banner;
-}
-   
+    @Override
+    public Banner findBanner(Long id) {
+        Banner banner = banRepo.findById(id).orElse(null);
+        return banner;
     }
-    
 
+}

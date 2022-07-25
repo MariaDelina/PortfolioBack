@@ -1,10 +1,9 @@
-
 package com.Portfolio.Portfolio.security.dto;
 
 import javax.validation.constraints.NotBlank;
 
-
 public class LoginUsuario {
+
     @NotBlank
     private String nombreUsuario;
     @NotBlank

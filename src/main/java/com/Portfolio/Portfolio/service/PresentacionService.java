@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.service;
 
 import com.Portfolio.Portfolio.model.Presentacion;
@@ -8,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PresentacionService implements IPresentacionService{
-    
+public class PresentacionService implements IPresentacionService {
+
     @Autowired
     private PresentacionRepository presRepo;
 
@@ -33,7 +32,4 @@ public class PresentacionService implements IPresentacionService{
         return presRepo.findById(id).orElse(null);
     }
 
-    }
-
-   
-
+}

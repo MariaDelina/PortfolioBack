@@ -1,6 +1,4 @@
-
 package com.Portfolio.Portfolio.controller;
-
 
 import com.Portfolio.Portfolio.model.Educacion;
 import com.Portfolio.Portfolio.repository.EducacionRepository;
@@ -23,41 +21,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT, RequestMethod.PATCH})
-@RequestMapping(path="/api/educacion")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
+@RequestMapping(path = "/api/educacion")
 public class EducacionController {
-    
-     @Autowired
+
+    @Autowired
     private IEducacionService educServ;
-     
-     @Autowired
+
+    @Autowired
     private EducacionRepository eduRepo;
-       
+
     @GetMapping("/lista")
     @ResponseBody
-    public List<Educacion> verEducacion(){
+    public List<Educacion> verEducacion() {
         return educServ.verEducacion();
     }
-    
+
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public Educacion buscarEducacion(@PathVariable Long id){
-       return educServ.buscarEducacion(id);
+    public Educacion buscarEducacion(@PathVariable Long id) {
+        return educServ.buscarEducacion(id);
     }
-         
+
     @PostMapping("/create")
-    public void agregarEducacion(@RequestBody Educacion educ){
+    public void agregarEducacion(@RequestBody Educacion educ) {
         educServ.crearEducacion(educ);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void borrarEducacion(@PathVariable Long id){
+    public void borrarEducacion(@PathVariable Long id) {
         educServ.borrarEducacion(id);
     }
-    
+
     @PutMapping("/update/{id}")
-      public ResponseEntity<Educacion> updateEducacion(@PathVariable("id") Long id, @RequestBody Educacion educacion){
-        Optional<Educacion> educacionData = eduRepo.findById (id);
-        if(educacionData.isPresent()){
+    public ResponseEntity<Educacion> updateEducacion(@PathVariable("id") Long id, @RequestBody Educacion educacion) {
+        Optional<Educacion> educacionData = eduRepo.findById(id);
+        if (educacionData.isPresent()) {
             Educacion _educacion = educacionData.get();
             _educacion.setCertificaciones(educacion.getCertificaciones());
             _educacion.setInfo_de_instituto(educacion.getInfo_de_instituto());
@@ -65,9 +64,9 @@ public class EducacionController {
             _educacion.setNombre_carrera(educacion.getNombre_carrera());
             _educacion.setDesde_periodo_ano(educacion.getDesde_periodo_ano());
             _educacion.setHasta_periodo_ano(educacion.getHasta_periodo_ano());
-            return new ResponseEntity<> (educServ.crearEducacion( _educacion), HttpStatus.OK);
-                    }else {
+            return new ResponseEntity<>(educServ.crearEducacion(_educacion), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }      
-}  
+        }
+    }
 }

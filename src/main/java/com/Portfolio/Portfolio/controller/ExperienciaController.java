@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.controller;
 
 import com.Portfolio.Portfolio.model.Experiencia;
@@ -22,51 +21,51 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT, RequestMethod.PATCH})
-@RequestMapping(path="/api/experiencia")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
+@RequestMapping(path = "/api/experiencia")
 public class ExperienciaController {
-    
+
     @Autowired
     private IExperienciaService expeServ;
-    
+
     @Autowired
     private ExperienciaRepository expRepo;
-       
+
     @GetMapping("/lista")
     @ResponseBody
-    public List<Experiencia> verExperiencia(){
+    public List<Experiencia> verExperiencia() {
         return expeServ.verExperiencia();
     }
-    
+
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public Experiencia buscarExperiencia(@PathVariable Long id){
-       return expeServ.buscarExperiencia(id);
+    public Experiencia buscarExperiencia(@PathVariable Long id) {
+        return expeServ.buscarExperiencia(id);
     }
-         
+
     @PostMapping("/create")
-    public void agregarExperiencia(@RequestBody Experiencia exp){
+    public void agregarExperiencia(@RequestBody Experiencia exp) {
         expeServ.crearExperiencia(exp);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void borrarExperiencia(@PathVariable Long id){
+    public void borrarExperiencia(@PathVariable Long id) {
         expeServ.borrarExperiencia(id);
     }
-    
-    
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Experiencia> updateExperiencia(@PathVariable("id") Long id, @RequestBody Experiencia experiencia){
-        Optional<Experiencia> experienciaData = expRepo.findById (id);
-        if(experienciaData.isPresent()){
+    public ResponseEntity<Experiencia> updateExperiencia(@PathVariable("id") Long id, @RequestBody Experiencia experiencia) {
+        Optional<Experiencia> experienciaData = expRepo.findById(id);
+        if (experienciaData.isPresent()) {
             Experiencia _experiencia = experienciaData.get();
             _experiencia.setLugar_de_trabajo(experiencia.getLugar_de_trabajo());
             _experiencia.setTitulo_del_puesto(experiencia.getTitulo_del_puesto());
             _experiencia.setUrl_logo_empresa(experiencia.getUrl_logo_empresa());
             _experiencia.setDescripcion_de_actividades(experiencia.getDescripcion_de_actividades());
             _experiencia.setFecha_de_actividad(experiencia.getFecha_de_actividad());
-            return new ResponseEntity<> (expeServ.crearExperiencia( _experiencia), HttpStatus.OK);
-                    }else {
+            return new ResponseEntity<>(expeServ.crearExperiencia(_experiencia), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }      
-}
+        }
+    }
 }

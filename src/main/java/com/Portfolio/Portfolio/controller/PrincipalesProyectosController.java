@@ -1,6 +1,4 @@
-
 package com.Portfolio.Portfolio.controller;
-
 
 import com.Portfolio.Portfolio.model.PrincipalesProyectos;
 import com.Portfolio.Portfolio.repository.PrincipalesProyectosRepository;
@@ -23,46 +21,48 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT, RequestMethod.PATCH})
-@RequestMapping(path="/api/principales_proyectos")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
+@RequestMapping(path = "/api/principales_proyectos")
 public class PrincipalesProyectosController {
-     @Autowired
+
+    @Autowired
     private IPrincipalesProyectosService prinproServ;
-     
-     @Autowired
+
+    @Autowired
     private PrincipalesProyectosRepository prinproyRepo;
-       
+
     @GetMapping("/lista")
     @ResponseBody
-    public List<PrincipalesProyectos> verPrincipalesProyectos(){
+    public List<PrincipalesProyectos> verPrincipalesProyectos() {
         return prinproServ.verPrincipalesProyectos();
     }
-    
+
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public PrincipalesProyectos buscarPrincipalesProyectos(@PathVariable Long id){
-       return prinproServ.buscarPrincipalesProyectos(id);
+    public PrincipalesProyectos buscarPrincipalesProyectos(@PathVariable Long id) {
+        return prinproServ.buscarPrincipalesProyectos(id);
     }
-         
+
     @PostMapping("/create")
-    public void agregarPrincipalesProyectos(@RequestBody PrincipalesProyectos prinpro){
+    public void agregarPrincipalesProyectos(@RequestBody PrincipalesProyectos prinpro) {
         prinproServ.crearPrincipalesProyectos(prinpro);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void borrarPrincipalesProyectos(@PathVariable Long id){
+    public void borrarPrincipalesProyectos(@PathVariable Long id) {
         prinproServ.borrarPrincipalesProyectos(id);
     }
-    
+
     @PutMapping("/update/{id}")
-      public ResponseEntity<PrincipalesProyectos> updatePrincipalesProyectos(@PathVariable("id") Long id, @RequestBody PrincipalesProyectos principalesProyectos){
-        Optional<PrincipalesProyectos> principalesProyectosData = prinproyRepo.findById (id);
-        if(principalesProyectosData.isPresent()){
+    public ResponseEntity<PrincipalesProyectos> updatePrincipalesProyectos(@PathVariable("id") Long id, @RequestBody PrincipalesProyectos principalesProyectos) {
+        Optional<PrincipalesProyectos> principalesProyectosData = prinproyRepo.findById(id);
+        if (principalesProyectosData.isPresent()) {
             PrincipalesProyectos _principalesProyectos = principalesProyectosData.get();
             _principalesProyectos.setUrl_primer_proyecto_principal(principalesProyectos.getUrl_primer_proyecto_principal());
             _principalesProyectos.setUrl_segundo_proyecto_principal(principalesProyectos.getUrl_segundo_proyecto_principal());
-            return new ResponseEntity<> (prinproServ.crearPrincipalesProyectos( _principalesProyectos), HttpStatus.OK);
-                    }else {
+            return new ResponseEntity<>(prinproServ.crearPrincipalesProyectos(_principalesProyectos), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }      
-}  
+        }
+    }
 }

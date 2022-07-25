@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.security.entity;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +15,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.security.service;
 
 import com.Portfolio.Portfolio.security.entity.Usuario;
@@ -12,22 +11,23 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class UsuarioService {
+
     @Autowired
     UsuarioRepository usuarioRepository;
-    
-    public Optional<Usuario> getByNombreUsuario(String nombreUsuario){
+
+    public Optional<Usuario> getByNombreUsuario(String nombreUsuario) {
         return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
-    
-    public boolean existsByNombreUsuario(String nombreUsuario){
+
+    public boolean existsByNombreUsuario(String nombreUsuario) {
         return usuarioRepository.existsByNombreUsuario(nombreUsuario);
     }
-    
-    public boolean existsByEmail(String email){
+
+    public boolean existsByEmail(String email) {
         return usuarioRepository.existsByEmail(email);
     }
-    
-    public void save(Usuario usuario){
+
+    public void save(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
 }

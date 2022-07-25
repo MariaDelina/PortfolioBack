@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.service;
 
 import com.Portfolio.Portfolio.model.Proyectos;
@@ -8,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProyectosService implements IProyectosService{
-    
-     @Autowired
+public class ProyectosService implements IProyectosService {
+
+    @Autowired
     private ProyectosRepository proyRepo;
 
     @Override
@@ -33,5 +32,4 @@ public class ProyectosService implements IProyectosService{
         return proyRepo.findById(id).orElse(null);
     }
 
-   
 }

@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.security.service;
 
 import com.Portfolio.Portfolio.security.entity.Usuario;
@@ -11,9 +10,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     UsuarioService usuarioService;
-    
+
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
         Usuario usuario = usuarioService.getByNombreUsuario(nombreUsuario).get();

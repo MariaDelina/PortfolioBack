@@ -1,4 +1,3 @@
-
 package com.Portfolio.Portfolio.security.jwt;
 
 import java.io.IOException;
@@ -12,8 +11,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtEntryPoint implements AuthenticationEntryPoint{
-     private final static Logger logger =  LoggerFactory.getLogger(JwtEntryPoint.class);
+public class JwtEntryPoint implements AuthenticationEntryPoint {
+
+    private final static Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
 
     @Override
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException, ServletException {
