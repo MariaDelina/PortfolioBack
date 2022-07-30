@@ -39,7 +39,7 @@ public class ProyectosController {
 
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public Proyectos buscarBanner(@PathVariable Long id) {
+    public Proyectos buscarProyectos(@PathVariable Long id) {
         return proServ.buscarProyectos(id);
     }
 
@@ -58,7 +58,6 @@ public class ProyectosController {
         Optional<Proyectos> proyectosData = proyRepo.findById(id);
         if (proyectosData.isPresent()) {
             Proyectos _proyectos = proyectosData.get();
-            _proyectos.setInfo_de_proyectos_realizados(proyectos.getInfo_de_proyectos_realizados());
             _proyectos.setNombre_de_proyecto(proyectos.getNombre_de_proyecto());
             _proyectos.setFecha_de_realizacion(proyectos.getFecha_de_realizacion());
             _proyectos.setDescripcion_del_proyecto(proyectos.getDescripcion_del_proyecto());

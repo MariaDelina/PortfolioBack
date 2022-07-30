@@ -22,8 +22,7 @@ public class Proyectos {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "info_de_proyectos_realizados")
-    private String info_de_proyectos_realizados;
+    
     @Column(name = "nombre_de_proyecto")
     private String nombre_de_proyecto;
     @Column(name = "fecha_de_realizacion")
@@ -37,9 +36,8 @@ public class Proyectos {
     public Proyectos() {
     }
 
-    public Proyectos(Long id, String info_de_proyectos_realizados, String nombre_de_proyecto, Date fecha_de_realizacion, String descripcion_del_proyecto, String link_de_evidencia) {
+    public Proyectos(Long id, String nombre_de_proyecto, Date fecha_de_realizacion, String descripcion_del_proyecto, String link_de_evidencia) {
         this.id = id;
-        this.info_de_proyectos_realizados = info_de_proyectos_realizados;
         this.nombre_de_proyecto = nombre_de_proyecto;
         this.fecha_de_realizacion = fecha_de_realizacion;
         this.descripcion_del_proyecto = descripcion_del_proyecto;
